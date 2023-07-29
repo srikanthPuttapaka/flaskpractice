@@ -1,27 +1,26 @@
-from flask import Flask,request,render_template
+from flask import Flask,request
 
 obj= Flask(__name__)
-
 
 @obj.route('/')
 def welcome():
     return "Welcome to the Flask"
 
-@obj.route('/cal',methods =["GET","POST"])
+@obj.route('/cal',methods =["GET"])
 def math_operation():
     operation=request.json["operation"]
     number1=request.json["number1"]
     number2=request.json["number2"]
 
-    if operation== "add":
-        result=number1+number2
+    if operation=="add":
+        result=int(number1)+int(number2)
     elif operation=="multiply":
-        result=number1*number2
+        result=int(number1)*int(number2)
     elif operation=="sub":
-        result=number1-number2
+        result=int(number1)-int(number2)
     else:
-        result= number1/number2
-    return result
+        result=int(number1)/int(number2)
+    return "the operation is {} and the result is {}".format(operation,result)
 
 print(__name__)
 if __name__ == '__main__':
